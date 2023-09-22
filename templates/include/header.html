@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <!DOCTYPE html>
 
 <html
@@ -132,11 +133,300 @@ div#myTable_filter {
   border-radius: 0 0 8px 8px;
   padding-bottom: 8px;
 }
+
+.offcanvas-top {
+  height: 100vh !important;
+}
+
 </style>
 
   </head>
-
   <body onload="selecteval(countryname)"> 
+    <div class="offcanvas offcanvas-top z-index" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Advanced Search Filter</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form method="GET" action="/search" enctype="multipart/form-data">  
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputFile">Nemo ID</label>
+                {{ filter.form.id }}
+              </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputFile">Name</label>
+                  {{ filter.form.first_name }}
+                </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Rank</label>
+                    <select class="form-select select2" style="width: 100%;" name="rank" id="id_rank">
+                      <option selected="selected" value="">-----</option>
+                      {% for r in filterrank %}
+                        <option value="{{ r.rank_name }}"
+                        {% comment %} {% if get_rank == r.rank_name %}selected{% endif %} {% endcomment %}
+                        >{{ r.rank_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <!-- /.form-group -->
+                </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Vessel</label>
+                <select class="form-select select2" style="width: 100%;" name="vessel_type" id="vessel_type">
+                  <option selected="selected" value="">-----</option>
+                  {% for v in filtervessel %}
+                  <option value="{{ v.vessel_name }}"
+                  {% comment %} {% if get_vessel == v.vessel_name %}selected{% endif %} {% endcomment %}
+                  >{{ v.vessel_name }}</option>
+                {% endfor %}
+                </select>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Experience</label>
+                <select class="form-select select2" style="width: 100%;" name="experience" id="id_experience">
+                  <option selected="selected" value="">-----</option>
+                  {% for e in filterexp %}
+                  <option value="{{ e.experience }}"
+                  {% comment %} {% if get_experience == e.experience %}selected{% endif %} {% endcomment %}
+                  >{{ e.experience }}</option>
+                {% endfor %}
+                </select>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Licence</label>
+                <select class="form-select select2" style="width: 100%;" name="license" id="id_license">
+                  <option selected="selected" value="">-----</option>
+                  {% for lt in filterlicense %}
+                  <option value="{{ lt.grade_name }}"
+                  {% if get_license == lt.grade_name %}selected{% endif %}
+                  >{{ lt.grade_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <!-- /.form-group -->
+            </div>
+          </div>
+  
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-select select2" style="width: 100%;" name="status" id="id_status">
+          <option selected="selected" value="">-----</option>
+          <option value="ACTIVE" {% if get_status == "ACTIVE" %} selected {% endif %}>ACTIVE</option>
+          <option value="IN-ACTIVE" {% if get_status == "IN-ACTIVE" %} selected {% endif %}>IN-ACTIVE</option>
+        </select>
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+         <label for="exampleInputEmail1">Available From</label>
+         {{ filter.form.availibity|attr:'type:date' }}
+       </div>
+     </div>
+     <!-- /.col -->
+     <div class="col-md-4">
+      <div class="form-group">
+         <label for="exampleInputEmail1">Available To</label>
+         {{ filter.form.availibityto|attr:'type:date' }}
+       </div>
+     </div>
+  </div>
+
+          
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Age Above</label>
+        <select class="form-select select2" name="ageabove" style="width: 100%;">
+          <option selected="selected" value="">-----</option>
+          <option>	18	</option>
+          <option>	19	</option>
+          <option>	20	</option>
+          <option>	21	</option>
+          <option>	22	</option>
+          <option>	23	</option>
+          <option>	24	</option>
+          <option>	25	</option>
+          <option>	26	</option>
+          <option>	27	</option>
+          <option>	28	</option>
+          <option>	29	</option>
+          <option>	30	</option>
+          <option>	31	</option>
+          <option>	32	</option>
+          <option>	33	</option>
+          <option>	34	</option>
+          <option>	35	</option>
+          <option>	36	</option>
+          <option>	37	</option>
+          <option>	38	</option>
+          <option>	39	</option>
+          <option>	40	</option>
+          <option>	41	</option>
+          <option>	42	</option>
+          <option>	43	</option>
+          <option>	44	</option>
+          <option>	45	</option>
+          <option>	46	</option>
+          <option>	47	</option>
+          <option>	48	</option>
+          <option>	49	</option>
+          <option>	50	</option>
+          <option>	51	</option>
+          <option>	52	</option>
+          <option>	53	</option>
+          <option>	54	</option>
+          <option>	55	</option>
+          <option>	56	</option>
+          <option>	57	</option>
+          <option>	58	</option>
+          <option>	59	</option>
+          <option>	60	</option>
+          <option>	61	</option>
+          <option>	62	</option>
+          <option>	63	</option>
+          <option>	64	</option>
+        </select>
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Age Below</label>
+        <select class="form-select select2" name="ageabelow"style="width: 100%;">
+          <option selected="selected" value="">-----</option>
+          <option>	18	</option>
+          <option>	19	</option>
+          <option>	20	</option>
+          <option>	21	</option>
+          <option>	22	</option>
+          <option>	23	</option>
+          <option>	24	</option>
+          <option>	25	</option>
+          <option>	26	</option>
+          <option>	27	</option>
+          <option>	28	</option>
+          <option>	29	</option>
+          <option>	30	</option>
+          <option>	31	</option>
+          <option>	32	</option>
+          <option>	33	</option>
+          <option>	34	</option>
+          <option>	35	</option>
+          <option>	36	</option>
+          <option>	37	</option>
+          <option>	38	</option>
+          <option>	39	</option>
+          <option>	40	</option>
+          <option>	41	</option>
+          <option>	42	</option>
+          <option>	43	</option>
+          <option>	44	</option>
+          <option>	45	</option>
+          <option>	46	</option>
+          <option>	47	</option>
+          <option>	48	</option>
+          <option>	49	</option>
+          <option>	50	</option>
+          <option>	51	</option>
+          <option>	52	</option>
+          <option>	53	</option>
+          <option>	54	</option>
+          <option>	55	</option>
+          <option>	56	</option>
+          <option>	57	</option>
+          <option>	58	</option>
+          <option>	59	</option>
+          <option>	60	</option>
+          <option>	61	</option>
+          <option>	62	</option>
+          <option>	63	</option>
+          <option>	64	</option>
+        </select>
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>License Country</label>
+        <select class="form-select select2" style="width: 100%;" name="license_country" id="id_license_country">
+          <option selected="selected" value="">-----</option>
+          {% for ct in filtercountry %}
+          <option value="{{ ct.country_name }}"
+          {% comment %} {% if get_license_country in ct.country_name %} selected {% endif %} {% endcomment %}
+  
+          
+          >{{ ct.country_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- /.form-group -->
+    </div>
+  </div> 
+  <div class="row mt-3">
+    
+    <!-- /.col -->
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Zone</label>
+        <select class="form-select select2" style="width: 100%;" name="zone" id="id_zone">
+          <option selected="selected" value="">-----</option>
+          <option {% if get_zone == "EAST" %} selected {% endif %}>EAST</option>
+          <option {% if get_zone == "WEST" %} selected {% endif %}>WEST</option>
+          <option {% if get_zone == "NORTH" %} selected {% endif %}>NORTH</option>
+          <option {% if get_zone == "SOUTH" %} selected {% endif %}>SOUTH</option>
+        </select>
+      </div>
+      <!-- /.form-group -->
+    </div>  
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Documents</label>
+        <select class="form-select select2" style="width: 100%;" name="document" id="id_document">
+          <option selected="selected" value="">-----</option>
+          {% for doc in filterdocument %}
+          <option>{{ doc.document_type }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- /.form-group -->
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+         <label for="exampleInputEmail1">Document Number</label>
+         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Document No">
+       </div>
+     </div>
+
+  </div> 
+  
+  <div class="col-md-2 mt-5">
+  <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Search now</button>
+  </div>
+        <!-- /.box-body -->
+      </form>   
+      </div>
+    </div>
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -463,8 +753,9 @@ div#myTable_filter {
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
               <div class="navbar-nav align-items-center">
+                <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="tf-icons bx bx-search"></i> Search...</button>
 
-                <form action="/search" method="GET" class="mt-2">
+                {% comment %} <form action="/search" method="GET" class="mt-2">
                   <div class="nav-item d-flex align-items-center">
                   <div id="autocomplete" class="">
                     <input class="autocomplete-input" 
@@ -475,7 +766,7 @@ div#myTable_filter {
                     <ul class="autocomplete-result-list"></ul>
                   </div>
                 </div>
-              </form>
+              </form> {% endcomment %}
               </div>
               <!-- /Search -->
 

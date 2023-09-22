@@ -231,6 +231,17 @@ $('#id_date_birth').on("change", function(e) {
         //console.log("Date changed: ", dob);
       $("#id_birth_month").val(dob);
       });
+
+$('#id_date_birth').on("change", function(e) {
+        var b_date = e.target.value; 
+        var arr1 = b_date.split('-');
+        var dob = arr1[0]
+        const date = new Date();
+        let year= date.getFullYear();
+        const f_date = year - dob;
+        //console.log("Date changed: ", dob);
+      $("#id_count_birth").val(f_date);
+      });      
       
 setTimeout(function() {
         $('#toast').fadeOut('fast');

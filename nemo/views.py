@@ -113,6 +113,14 @@ def dashboard(request):
         upcomingDate = checkDate.strftime("%m-%d")
         NewDate = currentdate.strftime("%Y-%m-%d")
         DiffDate = checkDate.strftime("%Y-%m-%d")
+        candidate = Candidate.objects.all().order_by('-id')
+        filter = CandidateFilter(request.GET, queryset=candidate)
+        filterrank = Rank.objects.all()
+        filtervessel = Vessel.objects.all()
+        filterexp = Experience.objects.all()
+        filterlicense = Grade.objects.all()
+        filtercountry = CountryName.objects.all()
+        filterdocument = DocumentType.objects.all()
         #birthdate start here
         upcoming_birthdays = Candidate.objects.filter(birth_month__lte = upcomingDate, birth_month__gte = formatDate)
         upcoming_reminders = discussion.objects.filter(reminder_date__lte = DiffDate, reminder_date__gte = NewDate)
@@ -127,6 +135,13 @@ def dashboard(request):
         opencrew = CrewPlanner.objects.filter(crew_status='POSITION OPEN')
 
         context ={
+             'filter':filter,
+             'filterrank':filterrank,
+             'filtervessel':filtervessel,
+             'filterexp':filterexp,
+             'filterlicense':filterlicense,
+             'filtercountry':filtercountry,
+             'filterdocument':filterdocument,
               'notifycount':notifycount,
               'avail_can':avail_can,
               'rank':rank,
@@ -148,6 +163,72 @@ def dashboard(request):
 @login_required(login_url='login')
 @admin_only
 def search(request):
+        candidate = Candidate.objects.all().order_by('-id')
+        notifycount = Notifications.objects.filter(status=False).count()
+        get_rank = request.GET.get('rank')
+        get_vessel = request.GET.get('vessel_type')
+        get_experience = request.GET.get('experience')
+        get_license = request.GET.get('license')
+        get_status = request.GET.get('status')
+        get_license_country = request.GET.get('license_country')
+        get_zone = request.GET.get('zone')
+        get_from_date = request.GET.get('availibity')
+        get_to_date = request.GET.get('availibityto')
+        get_ageabove = request.GET.get('ageabove')
+        get_agebelow = request.GET.get('ageabelow')
+        events_in_range = Candidate.objects.filter(availibity__gte=get_from_date, availibity__lte=get_to_date)   
+        dob_in_range = Candidate.objects.filter(count_birth__gte=get_ageabove, count_birth__lte=get_agebelow)   
+
+        if request.method == 'GET':
+         first_name = request.GET.get('first_name')
+        filter = CandidateFilter(request.GET, queryset=candidate)
+        paginator = Paginator(filter.qs, 10)
+        page = request.GET.get('page',1)
+        try:
+              users = paginator.page(page)
+        except PageNotAnInteger:
+              users = paginator.page(1)
+        except EmptyPage: 
+              users = paginator.page(paginator.num_pages)   
+        
+        filterrank = Rank.objects.all()
+        filtervessel = Vessel.objects.all()
+        filterexp = Experience.objects.all()
+        filtercountry = CountryName.objects.all()
+        filterlicense = Grade.objects.all()
+        filterdocument = DocumentType.objects.all()
+       
+        context ={ 
+                  'filter':filter,
+                  'filterrank':filterrank,
+                  'filtervessel':filtervessel,
+                  'filterexp':filterexp,
+                  'filterlicense':filterlicense,
+                  'filtercountry':filtercountry,
+                  'filterdocument':filterdocument,
+                  'page_obj':users,
+                  'first_name':first_name,
+                  'notifycount':notifycount,
+                  'get_rank':get_rank,
+                  'get_vessel':get_vessel,
+                  'get_experience':get_experience,
+                  'get_license':get_license,
+                  'get_status':get_status,
+                  'get_license_country':get_license_country,
+                  'get_zone':get_zone,
+                  'get_from_date':get_from_date,
+                  'get_to_date':get_to_date,
+                  'events_in_range':events_in_range,
+                  'dob_in_range' :dob_in_range
+                  
+                  }
+        return render(request,"view/view-search.html",context)
+#search end here
+
+#search start here
+@login_required(login_url='login')
+@admin_only
+def advancedsearch(request):
         candidate = Candidate.objects.all().order_by('-id')
         notifycount = Notifications.objects.filter(status=False).count()
         get_rank = request.GET.get('rank')
@@ -194,8 +275,10 @@ def search(request):
                   'get_zone':get_zone,
                   'document':document
                   }
-        return render(request,"view/view-search.html",context)
+        return render(request,"include/header.html",context)
 #search end here
+
+
 
 #user start here
 @login_required(login_url='login')

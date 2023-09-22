@@ -37,6 +37,7 @@ class Candidate(models.Model):
     nationality = models.CharField(max_length=200 , null=True)
     marital_status = models.CharField(max_length=200 , null=True)
     date_birth = models.CharField(max_length=200 , null=True)
+    count_birth = models.CharField(max_length=200 , null=True)
     birth_month= models.CharField(max_length=200 , null=True, blank=True)
     birth_place = models.CharField(max_length=200 , null=True)
     worked_with_us = models.CharField(max_length=200 , null=True)

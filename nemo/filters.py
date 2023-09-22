@@ -18,6 +18,12 @@ class CandidateFilter(django_filters.FilterSet):
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
 
+    rank = django_filters.CharFilter(
+        field_name='rank',
+        lookup_expr='icontains',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
     availibity = django_filters.CharFilter(
         field_name='availibity',
         lookup_expr='icontains',
@@ -54,11 +60,7 @@ class CandidateFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
-    rank = django_filters.CharFilter(
-        field_name='rank',
-        lookup_expr='icontains',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
+
     zone = django_filters.CharFilter(
         field_name='zone',
         lookup_expr='icontains',

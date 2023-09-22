@@ -73,7 +73,8 @@
     <label class="form-label" for="exampleInputEmail1">Date of birth *</label>
         {{form.date_birth  |attr:"type:date"}}
         <!--<input type="text" name="date_birth" id="date_birth">-->
-        {{form.birth_month|attr:"type:hidden"}}
+        {{form.birth_month|attr:"type:text"}}
+        {{form.count_birth|attr:"type:text"}}
     </div>
     <!-- /.col -->   
 <div class="mb-3 col-md-6">
