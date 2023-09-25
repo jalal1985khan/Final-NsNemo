@@ -1,11 +1,16 @@
+antiorm==1.2.1
 asgiref==3.6.0
+db==0.1.1
+db-sqlite3==0.0.1
 defusedxml==0.7.1
 diff-match-patch==20230430
 distlib==0.3.6
 Django==4.2
 django-admin-autocomplete-filter==0.7.1
+django-cors-headers==4.2.0
 django-filter==23.2
 django-widget-tweaks==1.4.12
+djangorestframework==3.14.0
 et-xmlfile==1.1.0
 filelock==3.12.0
 MarkupPy==1.14
@@ -14,9 +19,11 @@ numpy==1.24.3
 odfpy==1.4.1
 openpyxl==3.1.2
 pandas==2.0.1
+phonenumbers==8.13.20
 Pillow==9.5.0
 platformdirs==3.3.0
 protobuf==3.20.3
+pybind11==2.10.4
 PyMySQL==1.0.3
 python-dateutil==2.8.2
 pytz==2023.3
@@ -24,6 +31,7 @@ PyYAML==6.0
 six==1.16.0
 sqlparse==0.4.4
 tablib==3.4.0
+typing_extensions @ file:///private/tmp/python-typing-extensions-20230601-7330-1g8neex/typing_extensions-4.6.3/dist/typing_extensions-4.6.3-py3-none-any.whl
 tzdata==2023.3
 virtualenv==20.22.0
 whitenoise==6.4.0
