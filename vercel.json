@@ -7,7 +7,7 @@
 "route":[
     {
         "src": "/(.*)",
-        "dest": "elevate/wsgi.py"
+        "dest": "nemo/wsgi.py"
     }
 ]
 
